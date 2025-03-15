@@ -1,14 +1,14 @@
 # caesar cipher decode function
 def caesar_cipher_decode(encoded_message, offset):
   """
-  Decode a message that was encoded using a Caesar cipher.
+  decode a message that was encoded using a caesar cipher.
     
-  Args:
+  args:
     encoded_message (str): The message to decode
     offset (int): Number of positions each character shifts
     
-  Returns:
-    str: The decoded message
+  returns:
+    str: the decoded message
   """
   decoded_message = ''
 
@@ -18,7 +18,7 @@ def caesar_cipher_decode(encoded_message, offset):
       # determine ASCII offset based on case (uppercase or lowercase)
       ascii_offset = ord('A') if char.isupper() else ord('a')
 
-      # convert to 0-25 range, shift backward, and handle wrap-around with modulo
+      # convert to 0-25 range, shift forward, and handle wrap-around with modulo
       # note: we use (+)offset because we're decoding (going forward)
       offset_position = (ord(char) - ascii_offset + offset) % 26
 
@@ -33,26 +33,43 @@ def caesar_cipher_decode(encoded_message, offset):
 
 # caesar cipher encode function
 def caesar_cipher_encode(decoded_message, offset):
+  """
+  same pattern as 'caesar_cipher_decode' above,
+  but encodes by shifting characters to the left
+  """
   encoded_message = ''
 
   for char in decoded_message:
     # check if character is a letter
-    pass
-  else:
-    # keep non-alphabetic characters unchanged
-    encoded_message += char
+    if char.isalpha():
+      # determine ASCII offset based on case (uppercase or lowercase)
+      ascii_offset = ord('A') if char.isupper() else ord('a')
+
+      # convert to 0-25 range, shift backward, and handle wrap-around with modulo
+      # note: we use (-)offset because we're encoding (going backward)
+      offset_position = (ord(char) - ascii_offset - offset) % 26
+
+      # convert back to ASCII and then to character
+      encoded_char = chr(offset_position + ascii_offset)
+      encoded_message += encoded_char
+    else:
+      # keep non-alphabetic characters unchanged
+      encoded_message += char
   
   return encoded_message
 
 # input
 
-# message one
+# messages
 coded_message_1 = 'xuo jxuhu! jxyi yi qd unqcfbu ev q squiqh syfxuh. muhu oek qrbu je tusetu yj? y xefu ie! iudt cu q cuiiqwu rqsa myjx jxu iqcu evviuj!'
 
-encoded = coded_message_1
+decoded_message_2 = 'Hi there! This message was written by Ben and encoded using a Caesar cipher.'
+coded_message_2 = 'Xy jxuhu! Jxyi cuiiqwu mqi mhyjjud ro Rud qdt udsetut kiydw q Squiqh syfxuh.'
+
 offset_value = 10
-decoded = caesar_cipher_decode(encoded, offset_value)
+decoded = caesar_cipher_decode(coded_message_2, offset_value)
+encoded = caesar_cipher_encode(decoded_message_2, offset_value)
 
 # output
-print('Encoded Message:', encoded)
 print('Decoded Message:', decoded)
+print('Encoded Message:', encoded)
