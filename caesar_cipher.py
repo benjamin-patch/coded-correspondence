@@ -66,10 +66,14 @@ coded_message_1 = 'xuo jxuhu! jxyi yi qd unqcfbu ev q squiqh syfxuh. muhu oek qr
 decoded_message_2 = 'Hi there! This message was written by Ben and encoded using a Caesar cipher.'
 coded_message_2 = 'Xy jxuhu! Jxyi cuiiqwu mqi mhyjjud ro Rud qdt udsetut kiydw q Squiqh syfxuh.'
 
-offset_value = 10
-decoded = caesar_cipher_decode(coded_message_2, offset_value)
-encoded = caesar_cipher_encode(decoded_message_2, offset_value)
+coded_message_3 = 'jxu evviuj veh jxu iusedt cuiiqwu yi vekhjuud.'
+
+coded_message_4 = 'bqdradyuzs ygxfubxq omqemd oubtqde fa oapq kagd yqeemsqe ue qhqz yadq eqogdq!'
+
+offset_value = 14
+decoded = caesar_cipher_decode(coded_message_4, offset_value)
+# encoded = caesar_cipher_encode(decoded_message_2, offset_value)
 
 # output
+print('Encoded Message:', coded_message_4)
 print('Decoded Message:', decoded)
-print('Encoded Message:', encoded)
