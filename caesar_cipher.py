@@ -31,6 +31,19 @@ def caesar_cipher_decode(encoded_message, offset):
 
   return decoded_message
 
+# caesar cipher encode function
+def caesar_cipher_encode(decoded_message, offset):
+  encoded_message = ''
+
+  for char in decoded_message:
+    # check if character is a letter
+    pass
+  else:
+    # keep non-alphabetic characters unchanged
+    encoded_message += char
+  
+  return encoded_message
+
 # input
 
 # message one
