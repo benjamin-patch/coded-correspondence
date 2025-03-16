@@ -71,11 +71,18 @@ coded_message_3 = 'jxu evviuj veh jxu iusedt cuiiqwu yi vekhjuud.'
 coded_message_4 = 'bqdradyuzs ygxfubxq omqemd oubtqde fa oapq kagd yqeemsqe ue qhqz yadq eqogdq!'
 
 brute_force_coded_message_5 = "vhfinmxkl atox kxgwxkxw tee hy maxlx hew vbiaxkl hulhexmx. px'ee atox mh kxteer lmxi ni hnk ztfx by px ptgm mh dxxi hnk fxlltzxl ltyx."
+# cracked with offset 7 via brute force (below)
+brute_force_decoded_message_5 = "computers have rendered all of these old ciphers obsolete. we'll have to really step up our game if we want to keep our messages safe."
 
-offset_value = 14
-decoded = caesar_cipher_decode(coded_message_4, offset_value)
+# offset_value = 14
+# decoded = caesar_cipher_decode(coded_message_4, offset_value)
 # encoded = caesar_cipher_encode(decoded_message_2, offset_value)
 
 # output
-print('Encoded Message:', coded_message_4)
-print('Decoded Message:', decoded)
+# print('Encoded Message:', coded_message_4)
+# print('Decoded Message:', decoded)
+
+# brute force decode of an unknown offset (os) by looping through values
+for os in range(1, 15):
+  brute_attack = caesar_cipher_decode(brute_force_coded_message_5, os)
+  print('Offset ' + str(os) + ': ' + brute_attack)
