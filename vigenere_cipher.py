@@ -1,45 +1,49 @@
-# vigenère cipher decode function
-def vigenere_decode(coded_message, keyword):
+# vigenère cipher encode/decode function
+def vigenere_cipher(text, keyword, mode='decode'):
   alphabet = 'abcdefghijklmnopqrstuvwxyz'
-  decoded_message = []
-  key_position = 0  # track our position in the keyword
+  result = []
+  key_index = 0
   
-  # convert keyword to lowercase for consistency
   keyword = keyword.lower()
   
-  for letter in coded_message:
-    if not letter.isalpha():
-      # keep non-letters as-is
-      decoded_message.append(letter)
+  for char in text:
+    if not char.isalpha():
+      result.append(char)
       continue
-      
-    # get corresponding keyword letter (cycles using modulo)
-    key_char = keyword[key_position % len(keyword)]
-    
-    # find positions in alphabet
-    cipher_pos = alphabet.index(letter.lower())
+        
+    # get corresponding keyword letter
+    key_char = keyword[key_index % len(keyword)]
     key_pos = alphabet.index(key_char)
     
-    # reverse the original shift (add instead of subtract)
-    decoded_pos = (cipher_pos + key_pos) % 26
+    # determine shift direction
+    if mode == 'encode':
+      shift = -key_pos  # encoding uses subtraction
+    else:  # decode
+      shift = key_pos   # decoding uses addition
     
-    # preserve original case
-    decoded_char = alphabet[decoded_pos]
-    if letter.isupper():
-      decoded_char = decoded_char.upper()
+    # calculate new position
+    char_pos = alphabet.index(char.lower())
+    new_pos = (char_pos + shift) % 26
+    
+    # preserve case
+    new_char = alphabet[new_pos]
+    if char.isupper():
+      new_char = new_char.upper()
         
-    decoded_message.append(decoded_char)
-    key_position += 1  # move to next keyword letter
+    result.append(new_char)
+    key_index += 1
     
-  return ''.join(decoded_message)
+  return ''.join(result)
 
 # input
-coded_message_1 = 'txm srom vkda gl lzlgzr qpdb? fepb ejac! ubr imn tapludwy mhfbz cza ruxzal wg zztylktoikqq!'
-keyword_1 = 'friends'
-
-# function call
-decoded = vigenere_decode(coded_message_1, keyword_1)
+message_1 = "barry is the spy"
+keyword_1 = "dog"
+coded_message_2 = 'txm srom vkda gl lzlgzr qpdb? fepb ejac! ubr imn tapludwy mhfbz cza ruxzal wg zztylktoikqq!'
+keyword_2 = 'friends'
 
 # output
-print('Encoded Message:', coded_message_1)
-print('Decoded Message:', decoded)
+decoded = vigenere_cipher(coded_message_2, keyword_2)
+print(f"Decoded: {decoded}")
+
+encoded = vigenere_cipher(decoded, keyword_2, 'encode')
+print(f"Encoded: {encoded}")
